@@ -89,32 +89,3 @@ public class NoticeController {
     	return "redirect:selNotice";
     }
     
-    //跳转修改公告页面
-    @RequestMapping("/toUpdateNotice")
-    public String toUpdateNotice(Integer noticeId, Model model) {
-    	List<Notice> noticeList = noticeService.selectByNoticeId(noticeId);
-    	model.addAttribute( "noticeList", noticeList);
-    	return "updateNotice";
-    }
-    
-    //修改通知公告
-    @RequestMapping("/updateNotice")
-    public String updateNotice(Notice notice) {
-    	noticeService.updateNoticeByNoticeId(notice);
-    	return "redirect:selNotice";
-    }
-    
-    //跳转新增通知公告页面
-    @RequestMapping("/toAddNotice")
-    public String toAddNotice() {
-    	return "addNotice";
-    }
-    
-    //新增通知公告
-    @RequestMapping("/addNotice")
-    public String addNotice(Notice notice) {
-    	noticeService.insertNotice(notice);
-    	return "redirect:selNotice";
-    }
-
-}
