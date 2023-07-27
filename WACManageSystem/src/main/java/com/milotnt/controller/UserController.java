@@ -69,3 +69,43 @@ public class UserController {
         return "userClass";
     }
 
+    //退课
+    @RequestMapping("delUserClass")
+    public String deleteUserClass(Integer classOrderId) {
+        classOrderService.deleteByClassOrderId(classOrderId);
+        return "redirect:toUserClass";
+    }
+
+    //跳转报名选课页面
+    @RequestMapping("/toApplyClass")
+    public String toUserApplyClass(Model model, HttpSession session) {
+        Member member = (Member) session.getAttribute("user");
+        List<ClassTable> classList = classTableService.findAll();
+        model.addAttribute("member", member);
+        model.addAttribute("classList", classList);
+        return "userApplyClass";
+    }
+
+    //报名选课
+    @RequestMapping("/applyClass")
+    public String userApplyClass(Integer classId, Model model, HttpSession session) {
+        ClassTable classTable = classTableService.selectByClassId(classId);
+        Member member = (Member) session.getAttribute("user");
+
+        Integer classId1 = classTable.getClassId();
+        String className = classTable.getClassName();
+        String coach = classTable.getCoach();
+        String classBegin = classTable.getClassBegin();
+        String memberName = member.getMemberName();
+        Integer memberAccount = member.getMemberAccount();
+
+        ClassOrder classOrder = new ClassOrder(classId1, className, coach, memberName, memberAccount, classBegin);
+        Integer memberAccount1 = member.getMemberAccount();
+        ClassOrder classOrder1 = classOrderService.selectMemberByClassIdAndMemberAccount(classId1, memberAccount1);
+
+        if (classOrder1 == null) {
+            classOrderService.insertClassOrder(classOrder);
+        }
+
+        return "redirect:toUserClass";
+    }
