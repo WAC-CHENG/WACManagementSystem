@@ -9,23 +9,23 @@ import java.util.Map;
 
 public interface EquipmentService {
 
-    //查询所有器械
+    //Check all equipment
     List<Equipment> findAll();
     List<Equipment> findAllForUser(Map<String,String> params);
 
-    //根据id删除器械
+    //Delete equipment by ID
     Boolean deleteByEquipmentId(Integer equipmentId);
 
-    //添加器材
+    //add equipment
     Boolean insertEquipment(Equipment equipment);
 
-    //修改器械信息
+    //modify equipment info
     Boolean updateEquipmentByEquipmentId(Equipment equipment);
 
-    //根据id查询器械
+    //search equipment by ID
     List<Equipment> selectByEquipmentId(Integer equipmentId);
 
-    //查询器械总数
+    //check total equipment amount
     Integer selectTotalCount();
 
 }
