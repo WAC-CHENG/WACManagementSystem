@@ -2,13 +2,13 @@ package com.milotnt.service;
 
 import com.milotnt.pojo.Admin;
 
-/*管理员登录模块业务层接口*/
+/*Admin login module interface*/
 public interface AdminService {
 
     /**
-     * 管理员登录方法
+     * Way for admin to login
      * @param admin
-     * @return 当前匹配的数据，如果没有返回null
+     * @return If not return null, current date.
      */
     Admin adminLogin(Admin admin);
 

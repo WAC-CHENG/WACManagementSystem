@@ -7,22 +7,22 @@ import java.util.List;
 
 public interface ClassOrderService {
 
-    //查询所有报名表信息
+    //retrieve all registration info
     List<ClassOrder> findAll();
 
-    //添加报名信息
+    //add registration info
     Boolean insertClassOrder(ClassOrder classOrder);
 
-    //根据会员账号查询个人报名课表
+    //retrieve personal schedule by membership account
     List<ClassOrder> selectClassOrderByMemberAccount(Integer memberAccount);
 
-    //删除已预约的课程
+    //delete appointed course
     Boolean deleteByClassOrderId(Integer classOrderId);
 
-    //查询会员是否报名该课程
+    //confirm if member registered
     ClassOrder selectMemberByClassIdAndMemberAccount(Integer classId, Integer memberAccount);
 
-    //根据课程id查询所有报名的会员
+    //retrieve all registered member by course id
     List<ClassOrder> selectMemberOrderList(Integer classId);
 
 }
