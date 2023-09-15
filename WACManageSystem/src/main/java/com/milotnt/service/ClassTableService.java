@@ -7,19 +7,19 @@ import java.util.List;
 
 public interface ClassTableService {
 
-    //查询所有课程
+    //Retrive all courses
     List<ClassTable> findAll();
 
-    //根据id删除课程
+    //delete course by id
     Boolean deleteClassByClassId(Integer classId);
 
-    //添加课程
+    //add courses
     Boolean insertClass(ClassTable classTable);
 
-    //根据id查询课表
+    //retrive schedule by id
     ClassTable selectByClassId(Integer classId);
 
-    //根据id删除已预约的课程
+    //delete appointed courses by id
     Boolean deleteOrderByClassId(Integer classId);
 
 }

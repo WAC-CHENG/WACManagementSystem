@@ -7,22 +7,22 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    //查询所有员工
+    //retrive all staff
     List<Employee> findAll();
 
-    //根据员工账号删除员工
+    //delete staff by account
     Boolean deleteByEmployeeAccount(Integer employeeAccount);
 
-    //添加新员工
+    //add new staff
     Boolean insertEmployee(Employee employee);
 
-    //根据员工账号修改会员信息
+    //modify member info by account
     Boolean updateMemberByEmployeeAccount(Employee employee);
 
-    //根据员工账号查询员工
+    //retrive staff by account
     List<Employee> selectByEmployeeAccount(Integer employeeAccount);
 
-    //查询员工数
+    //retrive staff amount
     Integer selectTotalCount();
 
     Employee selectByAccountAndPassword(Employee employee);
