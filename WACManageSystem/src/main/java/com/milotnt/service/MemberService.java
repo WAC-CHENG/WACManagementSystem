@@ -8,26 +8,26 @@ import java.util.List;
 
 public interface MemberService {
 
-    //查询会员信息
+    //search member info
     List<Member> findAll();
 
-    //新增会员信息
+    //new member info
     Boolean insertMember(Member member);
 
-    //根据会员账号修改会员信息
+    //modify member info by id
     Boolean updateMemberByMemberAccount(Member member);
 
-    //查询会员账号密码（登录）
+    //search member login password
     Member userLogin(Member member);
 //    Member selectByAccountAndPassword(Member member);
 
-    //根据会员账号删除会员信息
+    //delete member info by account
     Boolean deleteByMemberAccount(Integer memberAccount);
 
-    //查询会员数
+    //search member amount
     Integer selectTotalCount();
 
-    //根据会员账号查询会员
+    //search member by account
     List<Member> selectByMemberAccount(Integer memberAccount);
 
 }
