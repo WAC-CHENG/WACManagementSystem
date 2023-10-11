@@ -28,59 +28,59 @@ public class LoginController {
     @Autowired
     private EquipmentService equipmentService;
 
-    //主页、跳转管理员登录页面
+    //main go to admin page
     @RequestMapping("/")
     public String toAdminLogin() {
         return "adminLogin";
     }
 
-    //跳转会员登录页面
+    //membership login page redirect
     @RequestMapping("/toUserLogin")
     public String toUserLogin() {
         return "userLogin";
     }
 
-    //跳转员工登录页面
+    //staff login page redirect
     @RequestMapping("/toEmployeeLogin")
     public String toEmployeeLogin() {
         return "employeeLogin";
     }
 
-//获取session中的account
+//get session's account
     public final String getAccountFromSession(HttpSession session) {
         return session.getAttribute("account").toString();
     }
 
-    //管理员登录
+    //admin login
     @RequestMapping("/adminLogin")
     public String adminLogin(Admin admin, Model model, HttpSession session) {
-//调用业务对象执行管理员登录功能，并获取返回值
+//Call the business object to perform the administrator login function and obtain the return value
         Admin admin1 = adminService.adminLogin(admin);
 
         if (admin1 != null) {
-//            向session对象中完成数据的绑定（全局的）
+//            Complete data binding to the session object (global)
 //            model.addAttribute("account", admin1.getAdminAccount());
 
-//            在session对象中完成数据的绑定（全局的）
+//            Complete data binding in the session object (global)
             session.setAttribute("account", admin1.getAdminAccount());
             System.out.println(getAccountFromSession(session));
 
-            //会员人数
+            //Number of members
             Integer memberTotal = memberService.selectTotalCount();
             model.addAttribute("memberTotal", memberTotal);
             session.setAttribute("memberTotal", memberTotal);
 
-            //员工人数
+            //Number of staff
             Integer employeeTotal = employeeService.selectTotalCount();
             model.addAttribute("employeeTotal", employeeTotal);
             session.setAttribute("employeeTotal", employeeTotal);
 
-            //健身房总人数
+            //total number of people in the gym
             Integer humanTotal = memberTotal + employeeTotal;
             model.addAttribute("humanTotal", humanTotal);
             session.setAttribute("humanTotal", humanTotal);
 
-            //器材数
+            //facilities number
             Integer equipmentTotal = equipmentService.selectTotalCount();
             model.addAttribute("equipmentTotal", equipmentTotal);
             session.setAttribute("equipmentTotal", equipmentTotal);
@@ -88,11 +88,11 @@ public class LoginController {
             return "adminMain";
 //            return "redirect:/adminMain.html";
         }
-        model.addAttribute("msg", "您输入的账号或密码有误，请重新输入!");
+        model.addAttribute("msg", "The account number or password you entered is incorrect, please re-enter it!");
         return "adminLogin";
     }
 
-    //会员登录
+    //member login
     @RequestMapping("/userLogin")
     public String userLogin(Member member, Model model, HttpSession session) {
         Member member1 = memberService.userLogin(member);
@@ -101,11 +101,11 @@ public class LoginController {
             session.setAttribute("user", member1);
             return "userMain";
         }
-        model.addAttribute("msg", "您输入的账号或密码有误，请重新输入!");
+        model.addAttribute("msg", "The account number or password you entered is incorrect, please re-enter it!");
         return "userLogin";
     }
 
-    //员工登录
+    //staff login
     @RequestMapping("/employeeLogin")
     public String employeeLogin(Employee employee, Model model, HttpSession session) {
         Employee member1 = employeeService.selectByAccountAndPassword(employee);
@@ -114,11 +114,11 @@ public class LoginController {
             session.setAttribute("employee", member1);
             return "employeeMain";
         }
-        model.addAttribute("msg", "您输入的账号或密码有误，请重新输入!");
+        model.addAttribute("msg", "The account number or password you entered is incorrect, please re-enter it!");
         return "employeeLogin";
     }
 
-    //跳转管理员主页
+    //Jump to administrator homepage
 //    @RequestMapping("/toAdminMain")
 //    public String toAdminMain(Model model, HttpSession session) {
 //        Integer memberTotal = (Integer) session.getAttribute("memberTotal");
@@ -132,7 +132,7 @@ public class LoginController {
 //        return "adminMain";
 //    }
 
-    //跳转会员主页
+    //Jump to member homepage
     @RequestMapping("/toUserMain")
     public String toUserMain(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("user");

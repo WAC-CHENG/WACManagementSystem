@@ -29,20 +29,20 @@ public class EqOrderController {
     @Autowired
     private EquipmentService equipmentService;
 
-    //查询器材预约情况
+    //check facilities appointments
     @RequestMapping("/selEqOrder")
     public String selectEqOrder(String date, String time, Model model, HttpSession session) {
         //~~~~~~~~~~~~~~
-        //封装参数
+        //incrypt info
         EqOrder seat = new EqOrder();
         if (date == null || date.length() == 0) {
-            //2022-05-08  为的是查询当天的全部
+            //2022-05-08  for checking all of the current date
             seat.setEqdate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         } else {
                 seat.setEqdate(date);
         }
         if (time == null || time.length() == 0) {
-            //seat.setEqBegin("08点-12点");
+            //seat.setEqBegin("08am-12pm");
         } else {
             seat.setEqBegin(time);
         }
@@ -52,7 +52,7 @@ public class EqOrderController {
         return "selectEqOrder";
     }
 
-    //查询器材预约情况
+    //check facility appointment
     @RequestMapping("/selEqOrder1")
     public String selectEqOrder1(String date, String time, Model model, HttpSession session) {
         //~~~~~~~~~~~~~~
@@ -73,7 +73,7 @@ public class EqOrderController {
         return "selectEqOrder1";
     }
 
-    //跳转至管理员场所和器材预约管理
+    //go to the admin page
     @RequestMapping("/selEqOrderAdmin")
     public String selectEqOrderAdmin(String date, String time, Model model, HttpSession session) {
 
@@ -84,7 +84,7 @@ public class EqOrderController {
             seat.setEqdate(date);
         }
         if (time == null || time.length() == 0) {
-            seat.setEqBegin("08点-12点");
+            seat.setEqBegin("08am-12pm");
         } else {
             seat.setEqBegin(time);
         }
@@ -94,11 +94,11 @@ public class EqOrderController {
         return "selectEqOrderAdmin";
     }
 
-    //查询场所
+    //check room
     @RequestMapping("/selEquipmentForUser")
     public String selEquipmentForUser(Model model, HttpSession session) {
         Map<String, String> params = new HashMap<String, String>();
-        params.put("equipmentStatus", "正常");
+        params.put("equipmentStatus", "normal");
         List<Equipment> equipmentList = equipmentService.findAll();
         session.setAttribute("equipmentList", equipmentList);
         model.addAttribute("equipmentList", equipmentList);
@@ -106,7 +106,7 @@ public class EqOrderController {
     }
 
 
-    //跳转修改器材页面
+    //go to the facility modify page
     @RequestMapping("/toyuyueEquipment")
     public String toyuyueEquipment(Integer equipmentId, Model model, HttpSession session) {
 
@@ -118,7 +118,7 @@ public class EqOrderController {
         return "yuyueEquipment";
     }
 
-    //跳转修改器材页面
+    //go to the facility modify page
     @RequestMapping("/yuyueEquipment")
     public String yuyueEquipment(Integer eqOrderId, Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("user");
@@ -127,22 +127,22 @@ public class EqOrderController {
         EqOrder eqOrder = eqOrderService.selectBYid(eqOrderId);
         eqOrder.setMemberAccount(memberAccount);
         eqOrder.setMemberName(memberName);
-        eqOrder.setStatus("已预约");
+        eqOrder.setStatus("appointed");
         eqOrderService.updateEqOrder(eqOrder);
         return "redirect:toyuyueEquipment";
     }
 
-    //跳转修改器材页面
+    //go to the facility modify page
     @RequestMapping("/yuyueXiaofeiEquipment")
     public String yuyueXiaofeiEquipment(Integer eqOrderId, Model model) {
 
         EqOrder eqOrder = eqOrderService.selectBYid(eqOrderId);
-        eqOrder.setStatus("已到店");
+        eqOrder.setStatus("arrived");
         eqOrderService.updateEqOrder(eqOrder);
         return "redirect:selEqOrderAdmin";
     }
 
-    //跳转修改器材页面
+    //go to the facility modify page
     @RequestMapping("/yuyueShuangyueEquipment")
     public String yuyueShuangyueEquipment(Integer eqOrderId, Model model) {
 

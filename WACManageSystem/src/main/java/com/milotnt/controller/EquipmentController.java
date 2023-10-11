@@ -23,7 +23,7 @@ public class EquipmentController {
     @Autowired
     private EquipmentService equipmentService;
 
-    //查询器材
+    //facility check
     @RequestMapping("/selEquipment")
     public String selectEquipment(Model model, HttpSession session) {
         List<Equipment> equipmentList = equipmentService.findAll();
@@ -32,11 +32,11 @@ public class EquipmentController {
         return "selectEquipment";
     }
     
-    //查询器材
+    //facility check
     @RequestMapping("/selEquipmentForUser")
     public String selEquipmentForUser(Model model, HttpSession session) {
     	Map<String,String> params=new HashMap<String,String>();
-    	params.put("equipmentStatus", "正常");
+    	params.put("equipmentStatus", "normal");
         List<Equipment> equipmentList = equipmentService.findAll();
         session.setAttribute("equipmentList", equipmentList);
         model.addAttribute("equipmentList", equipmentList);
@@ -44,14 +44,14 @@ public class EquipmentController {
     }
 
 
-    //删除器材
+    //delete facility
     @RequestMapping("/delEquipment")
     public String deleteEquipment(Integer equipmentId) {
         equipmentService.deleteByEquipmentId(equipmentId);
         return "redirect:selEquipment";
     }
 
-    //跳转修改器材页面
+    //modify
     @RequestMapping("/toUpdateEquipment")
     public String toUpdateEquipment(Integer equipmentId, Model model) {
         List<Equipment> equipmentList = equipmentService.selectByEquipmentId(equipmentId);
@@ -59,7 +59,7 @@ public class EquipmentController {
         return "updateEquipment";
     }
 
-    //跳转修改器材页面
+    //modify
     @RequestMapping("/toYuyueEquipment")
     public String toYuyueEquipment(Integer equipmentId, Model model) {
     	List<Equipment> equipmentList = equipmentService.selectByEquipmentId(equipmentId);
@@ -68,20 +68,20 @@ public class EquipmentController {
     }
 
 
-    //修改器材
+    //modify
     @RequestMapping("/updateEquipment")
     public String updateEquipment(Equipment equipment) {
         equipmentService.updateEquipmentByEquipmentId(equipment);
         return "redirect:selEquipment";
     }
 
-    //跳转新增器材页面
+    //go to the new page
     @RequestMapping("/toAddEquipment")
     public String toAddEquipment() {
         return "addEquipment";
     }
 
-    //新增器材
+    //add facilities
     @RequestMapping("/addEquipment")
     public String addEquipment(Equipment equipment) {
     	equipment.setEquipmentStatus("正常");

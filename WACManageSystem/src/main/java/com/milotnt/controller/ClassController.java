@@ -21,7 +21,7 @@ public class ClassController {
     @Autowired
     private ClassOrderService classOrderService;
 
-    //查询课程
+    //search class
     @RequestMapping("/selClass")
     public String selectClass(Model model) {
         List<ClassTable> classList = classTableService.findAll();
@@ -29,7 +29,7 @@ public class ClassController {
         return "selectClass";
     }
 
-    //查询课程
+    //search class
     @RequestMapping("/selClass2")
     public String selectClass2(Model model) {
     	List<ClassTable> classList = classTableService.findAll();
@@ -37,20 +37,20 @@ public class ClassController {
     	return "selectClass2";
     }
 
-    //跳转新增课程页面
+    //go to new added courses page
     @RequestMapping("/toAddClass")
     public String toAddClass() {
         return "addClass";
     }
 
-    //新增课程
+    //new added course
     @RequestMapping("/addClass")
     public String addClass(ClassTable classTable) {
         classTableService.insertClass(classTable);
         return "redirect:selClass";
     }
 
-    //删除课程
+    //delete course
     @RequestMapping("/delClass")
     public String deleteClass(Integer classId) {
         classTableService.deleteClassByClassId(classId);
@@ -58,7 +58,7 @@ public class ClassController {
         return "redirect:selClass";
     }
 
-    //查询课程报名信息
+    //search course register
     @RequestMapping("/selClassOrder")
     public String selectClassOrder(Integer classId, Model model) {
         List<ClassOrder> classOrderList = classOrderService.selectMemberOrderList(classId);
@@ -66,7 +66,7 @@ public class ClassController {
         return "selectClassOrder";
     }
 
-    //查询课程报名信息
+    //check course register info
     @RequestMapping("/selClassOrder2")
     public String selectClassOrder2(Integer classId, Model model) {
     	List<ClassOrder> classOrderList = classOrderService.selectMemberOrderList(classId);
