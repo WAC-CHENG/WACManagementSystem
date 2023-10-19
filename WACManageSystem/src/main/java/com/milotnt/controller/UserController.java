@@ -28,7 +28,7 @@ public class UserController {
     private ClassOrderService classOrderService;
 
 
-    //跳转个人信息页面
+    //personal info page
     @RequestMapping("/toUserInfo")
     public String toUserInformation(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("user");
@@ -36,7 +36,7 @@ public class UserController {
         return "userInformation";
     }
 
-    //跳转修改个人信息页面
+    //mopdify personal info page
     @RequestMapping("/toUpdateInfo")
     public String toUpdateUserInformation(HttpSession session, Model model) {
         Member member = (Member) session.getAttribute("user");
@@ -44,7 +44,7 @@ public class UserController {
         return "updateUserInformation";
     }
 
-    //修改个人信息
+    //modify personal info
     @RequestMapping("/updateInfo")
     public String updateUserInformation(HttpSession session, Member member) {
         Member member1 = (Member) session.getAttribute("user");
@@ -58,7 +58,7 @@ public class UserController {
         return "userInformation";
     }
 
-    //跳转我的课程页面
+    //my course
     @RequestMapping("/toUserClass")
     public String toUserClass(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("user");
@@ -69,14 +69,14 @@ public class UserController {
         return "userClass";
     }
 
-    //退课
+    //quit
     @RequestMapping("delUserClass")
     public String deleteUserClass(Integer classOrderId) {
         classOrderService.deleteByClassOrderId(classOrderId);
         return "redirect:toUserClass";
     }
 
-    //跳转报名选课页面
+    //registration
     @RequestMapping("/toApplyClass")
     public String toUserApplyClass(Model model, HttpSession session) {
         Member member = (Member) session.getAttribute("user");
@@ -86,7 +86,7 @@ public class UserController {
         return "userApplyClass";
     }
 
-    //报名选课
+    //register
     @RequestMapping("/applyClass")
     public String userApplyClass(Integer classId, Model model, HttpSession session) {
         ClassTable classTable = classTableService.selectByClassId(classId);

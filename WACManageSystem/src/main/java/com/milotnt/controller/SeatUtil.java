@@ -31,7 +31,7 @@ public class SeatUtil {
     @Autowired
     private EquipmentService equipmentService;
 
-	//每天晚上11点生成后天的所有座位信息
+	//每天晚上11点生成后天的所有座位信息11 o'clock 
 	
 	@Scheduled(cron = "0 0 13 * * ?")  //每天晚上23点运行一次  生成所有新的座位
 	public void generateNextDay(){
