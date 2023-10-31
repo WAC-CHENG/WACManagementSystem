@@ -5,19 +5,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//定义一个拦截器
+//define
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//登陆成功后，获取session中的account
+//Once logged in，get session account
         Object account = request.getSession().getAttribute("account");
         if (account == null) {
-            System.out.println("没有检测到登录，重定向到管理员登录页面");
+            System.out.println("No login detected, redirected to admin login page");
             response.sendRedirect("/adminLogin.html");
-//            结束后续的调用
+//            End subsequent calls
             return false;
         }
-//        请求放行
+//        request release
         return true;
     }
 
