@@ -5,13 +5,13 @@ import lombok.Data;
 //@Data
 public class ClassOrder {
 
-    private Integer classOrderId;//报名表id
-    private Integer classId;//课程id
-    private String className;//课程姓名
-    private String coach;//教练
-    private String memberName;//会员姓名
-    private Integer memberAccount;//会员账号
-    private String classBegin;//开课时间
+    private Integer classOrderId;//registration id
+    private Integer classId;//course id
+    private String className;//course name
+    private String coach;//coach
+    private String memberName;//member name
+    private Integer memberAccount;//member account
+    private String classBegin;//course start date
 
     public ClassOrder() {
     }
